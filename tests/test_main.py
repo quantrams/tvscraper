@@ -5,4 +5,4 @@ from datetime import datetime as dt, date
 
 
 def test_main(env_context):
-    pass
+    main()

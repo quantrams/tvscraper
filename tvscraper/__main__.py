@@ -2,7 +2,7 @@ from .tv_crawler import TVCrawler
 
 
 def main():
-    crawler = TVCrawler(config_fp="config.yml", secrets_fp="secrets.json")
+    crawler = TVCrawler(driver_flavor='chrome')
     # sign if if credentials are available
     if hasattr(crawler, 'secrets'):
         crawler.go("http://www.tradingview.com/#signin")

@@ -6,6 +6,7 @@ from .utils import wait
 
 
 class TVCrawler(BaseCrawler):
+    HOME_URL = "http://www.tradingview.com/chart"
     OHLC_XPATH = ("/html/body//div[contains(@class,'valueItem')]/"
                   "div[contains(text(),'{0}')]/../div[2]")
 
