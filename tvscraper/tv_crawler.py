@@ -61,3 +61,4 @@ class TVCrawler(BaseCrawler):
         user_box.send_keys(self.secrets.TV_USER)
         pass_box.send_keys(self.secrets.TV_PASS)
         self.click(submit)
+

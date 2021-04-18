@@ -8,4 +8,5 @@ def main():
         crawler.go("http://www.tradingview.com/#signin")
         crawler.handle_login()
     crawler.go_home()
+    print("URL is :", crawler.driver.current_url)
 
