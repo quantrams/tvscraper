@@ -1,0 +1,28 @@
+[tool.poetry]
+name = "alpaca2pg"
+version = "1.0.0"
+description = "Alpaca to PostgreSQL ETL"
+authors = ["Ethan Ho <eho@tacc.utexas.edu>"]
+license = "MIT"
+include = ["alpaca2pg/sql/*.sql"]
+
+[tool.poetry.dependencies]
+python = "^3.7"
+pytest-pythonpath = "^0.7.3"
+alpaca-trade-api = "^1.1.0"
+petl = {extras = ["db", "pandas", "numpy"], version = "^1.7.4"}
+psycopg2 = "^2.0"
+attr = "^0.3.1"
+
+[tool.poetry.dev-dependencies]
+pytest = "^6.2.3"
+python-dotenv = "^0.17.0"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+markers = [
+    "live_db: marks tests that require a live DB connection"
+]
