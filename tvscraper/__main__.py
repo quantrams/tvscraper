@@ -20,19 +20,14 @@ def get_chrome_options():
 
 
 def main():
-    driver = webdriver.Chrome(options=get_chrome_options())
-    crawler = TVCrawler(driver=driver, 
-                        home_url="https://www.tradingview.com/chart/BCEOOLCE/")
+    crawler = TVCrawler(
+        # driver=webdriver.Chrome(options=get_chrome_options()), 
+        driver_flavor='chrome',
+        home_url="https://www.tradingview.com/chart/BCEOOLCE/")
     # crawler = TVCrawler(driver=get_remote_driver())
 
-    # enter TradingView credentials
-    crawler.secrets = AttrDict({k: os.environ[k] for k in ('TV_USER', 'TV_PASS')})
-    
-    # sign in 
-    # crawler.go("http://www.tradingview.com/#signin")
-    # crawler.handle_login()
     crawler.go_home()
-    print("URL is:", crawler.driver.current_url)
+    symbols = crawler.get_screener_symbols()
 
 
 if __name__ == '__main__':

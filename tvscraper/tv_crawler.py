@@ -64,3 +64,12 @@ class TVCrawler(BaseCrawler):
         pass_box.send_keys(self.secrets.TV_PASS)
         self.click(submit)
 
+    def get_screener_symbols(self):
+        # cells = self.driver.find_elements_by_xpath(self.SCREENER_SYMS_XPATH)
+        export_button = self.driver.find_element_by_xpath(
+            "/html/body//div[contains(@class, 'tv-screener-toolbar') "
+            "and contains(@data-name, 'export')]"
+        )
+        breakpoint()
+        
+        
