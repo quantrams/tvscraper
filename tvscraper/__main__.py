@@ -20,7 +20,7 @@ def get_chrome_options():
     pathlib.Path(dl_dir).mkdir(parents=True, exist_ok=True)
 
     chrome_options = Options()
-    options.add_experimental_option("prefs", {
+    chrome_options.add_experimental_option("prefs", {
         "download.default_directory": dl_dir,
         "download.prompt_for_download": False,
         "download.directory_upgrade": True,
@@ -33,8 +33,8 @@ def get_chrome_options():
 
 def main():
     crawler = TVCrawler(
-        # driver=webdriver.Chrome(options=get_chrome_options()), 
-        driver_flavor='chrome',
+        driver=webdriver.Chrome(options=get_chrome_options()), 
+        # driver_flavor='chrome',
         # driver=get_remote_driver()
         home_url="https://www.tradingview.com/chart/BCEOOLCE/")
 
