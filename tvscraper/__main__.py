@@ -55,7 +55,7 @@ def get_opts():
     """Get command line options from argparse"""
     p = argparse.ArgumentParser(
         description="Scrape TradingView Screener for a given chart")
-    p.add_argument('-u', '--url', type=str, required=True,
+    p.add_argument('-u', '--url', type=str, required=False,
                    default="https://www.tradingview.com/chart/BCEOOLCE/")
     return vars(p.parse_args())
 
