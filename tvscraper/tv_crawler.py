@@ -9,6 +9,8 @@ class TVCrawler(BaseCrawler):
     HOME_URL = "http://www.tradingview.com/chart"
     OHLC_XPATH = ("/html/body//div[contains(@class,'valueItem')]/"
                   "div[contains(text(),'{0}')]/../div[2]")
+    SCREENER_SYMS_XPATH = ("/html/body//div[contains(@class, 'tv-screener')]" 
+                           "//table/tbody//td[1]//div[@title]")
 
     def get_xpath(self, name):
         if name in 'ohlc':

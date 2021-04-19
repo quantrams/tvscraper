@@ -1,3 +1,5 @@
+import os
+from attrdict import AttrDict
 from selenium import webdriver
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from selenium.webdriver.chrome.options import Options
@@ -14,22 +16,24 @@ def get_chrome_options():
     chrome_options = Options()
     chrome_options.add_argument("--headless")
     chrome_options.add_argument("--no-sandbox")
-    # chrome_options.add_argument("--disable-dev-shm-usage")
-    # chrome_prefs = dict()
-    # chrome_options.experimental_options["prefs"] = chrome_prefs
-    # chrome_prefs["profile.default_content_settings"] = {"images": 2}
     return chrome_options
 
 
 def main():
-    crawler = TVCrawler(driver=webdriver.Chrome(options=get_chrome_options()))
+    driver = webdriver.Chrome(options=get_chrome_options())
+    crawler = TVCrawler(driver=driver, 
+                        home_url="https://www.tradingview.com/chart/BCEOOLCE/")
     # crawler = TVCrawler(driver=get_remote_driver())
-    # sign if if credentials are available
-    if hasattr(crawler, 'secrets'):
-        crawler.go("http://www.tradingview.com/#signin")
-        crawler.handle_login()
+
+    # enter TradingView credentials
+    crawler.secrets = AttrDict({k: os.environ[k] for k in ('TV_USER', 'TV_PASS')})
+    
+    # sign in 
+    # crawler.go("http://www.tradingview.com/#signin")
+    # crawler.handle_login()
     crawler.go_home()
-    print("URL is :", crawler.driver.current_url)
+    print("URL is:", crawler.driver.current_url)
+
 
 if __name__ == '__main__':
     main()

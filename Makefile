@@ -7,8 +7,8 @@ dist: clean
 image: dist
 	docker build --rm -t $(DOCKER_IMAGE) .
 
-tests-docker: image 
-	docker run --rm -it -v /dev/shm:/dev/shm $(DOCKER_IMAGE) 
+tests-docker: image .env
+	docker run --rm -it -v /dev/shm:/dev/shm --env-file .env $(DOCKER_IMAGE) 
 
 tests: tests-docker
 	tox --
