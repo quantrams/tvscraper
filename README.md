@@ -52,7 +52,7 @@ docker run --env-file .env quantrams/tvscraper:latest --help
     ```
 - Run tests only (no push) using [act](https://github.com/nektos/act)
     ```bash
-    act pull_request`
+    act --env-file .env --env pull_request
     ```
 
 [1]: ./example.env

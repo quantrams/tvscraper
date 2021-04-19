@@ -1,4 +1,5 @@
 import os
+import argparse
 import pathlib
 from attrdict import AttrDict
 from selenium import webdriver
@@ -31,12 +32,12 @@ def get_chrome_options():
     return chrome_options
 
 
-def main():
+def main(**opts):
     crawler = TVCrawler(
         driver=webdriver.Chrome(options=get_chrome_options()), 
         # driver_flavor='chrome',
         # driver=get_remote_driver()
-        home_url="https://www.tradingview.com/chart/BCEOOLCE/")
+        home_url=opts['url'])
 
     # enter TradingView credentials
     crawler.secrets = AttrDict({k: os.environ[k] for k in ('TV_USER', 'TV_PASS')})
@@ -50,5 +51,15 @@ def main():
     symbols = crawler.get_screener_symbols()
 
 
+def get_opts():
+    """Get command line options from argparse"""
+    p = argparse.ArgumentParser(
+        description="Scrape TradingView Screener for a given chart")
+    p.add_argument('-u', '--url', type=str, required=True,
+                   default="https://www.tradingview.com/chart/BCEOOLCE/")
+    return vars(p.parse_args())
+
+
 if __name__ == '__main__':
-    main()
+    opts = get_opts()
+    main(**opts)

@@ -5,4 +5,7 @@ from datetime import datetime as dt, date
 
 
 def test_main(env_context):
-    main()
+    opts = {
+        'url': "https://www.tradingview.com/chart/BCEOOLCE/"
+    }
+    main(**opts)
