@@ -1,4 +1,4 @@
 DOCKER_ORG ?= quantrams
-DOCKER_REPO ?= alpaca2pg
+DOCKER_REPO ?= tvscraper
 DOCKER_TAG ?= 1.0.0
 DOCKER_IMAGE ?= $(DOCKER_ORG)/$(DOCKER_REPO):$(DOCKER_TAG)
