@@ -1,8 +1,10 @@
+from time import sleep
 import logging
 from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 from .base_crawler import BaseCrawler
 from .utils import wait
+from selenium.common.exceptions import ElementClickInterceptedException
 
 
 class TVCrawler(BaseCrawler):
@@ -64,12 +66,20 @@ class TVCrawler(BaseCrawler):
         pass_box.send_keys(self.secrets.TV_PASS)
         self.click(submit)
 
+    @wait(10)
     def get_screener_symbols(self):
-        # cells = self.driver.find_elements_by_xpath(self.SCREENER_SYMS_XPATH)
         export_button = self.driver.find_element_by_xpath(
             "/html/body//div[contains(@class, 'tv-screener-toolbar') "
             "and contains(@data-name, 'export')]"
         )
-        breakpoint()
+        sleep(3)
+        try:
+            export_button.click()
+        except ElementClickInterceptedException:
+            self.driver.find_element_by_xpath(
+                "/html/body//*[@data-name='close']").click()
+            sleep(3)
+            export_button.click()
+        sleep(20)
         
         

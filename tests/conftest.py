@@ -15,4 +15,4 @@ def env_context(dot_env, monkeypatch):
     for k, v in dot_env.items():
         monkeypatch.setenv(k, v)
         # DEBUG
-        # print(f'setting {k} to {v}')
+        print(f'setting {k} to {v}')
