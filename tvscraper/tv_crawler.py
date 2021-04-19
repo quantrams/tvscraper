@@ -74,6 +74,7 @@ class TVCrawler(BaseCrawler):
         )
         sleep(3)
         try:
+            print(f"Attemping export...")
             export_button.click()
         except ElementClickInterceptedException:
             self.driver.find_element_by_xpath(
@@ -81,5 +82,6 @@ class TVCrawler(BaseCrawler):
             sleep(3)
             export_button.click()
         sleep(20)
+        print(f"Finished method get_screener_symbols")
         
         

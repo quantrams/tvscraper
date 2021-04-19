@@ -11,8 +11,9 @@ on:
 env:
   DOCKER_USER: enho
   DOCKER_ORG: quantrams
-  DOCKER_REPO: alpaca2pg
+  DOCKER_REPO: tvscraper
   DOCKER_TAG: 1.0.0
+  TV_USER: ethannho
 
 jobs:
 
@@ -28,20 +29,22 @@ jobs:
           python-version: '3.7'
       - name: Install Python dependencies
         run: python -m pip install -q virtualenv poetry
-      - name: Install apt dependencies
-        run: |
-          apt-get update
-          apt-get install -yq libpq-dev gcc
-
-      # test & build
-      - name: Run tests in poetry env
-        run: |
-          poetry install
-          poetry run python -m alpaca2pg --help
-          poetry run pytest tests/ -m 'not live_db'
+      
+      # build
       - name: Build dist
+        run: poetry build
+      - name: Build Docker image
+        uses: docker/build-push-action@v2
+        with:
+          context: .
+          push: false
+          tags: ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }}
+      
+      # run tests in Docker image
+      # native python won't work because chromedriver
+      - name: Run tests in Docker
         run: |
-          poetry build
+          docker run --rm -it -v /dev/shm:/dev/shm --env TV_USER=${{ env.TV_USER }} --env TV_PASS=${{ secrets.TV_PASS }} ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }} 
 
       # push
       - name: Login to DockerHub
