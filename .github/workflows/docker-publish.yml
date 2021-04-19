@@ -44,7 +44,7 @@ jobs:
       # native python won't work because chromedriver
       - name: Run tests in Docker
         run: |
-          docker run --rm -it -v /dev/shm:/dev/shm --env TV_USER=${{ env.TV_USER }} --env TV_PASS=${{ secrets.TV_PASS }} ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }} 
+          docker run --rm -v /dev/shm:/dev/shm --env TV_USER=${{ env.TV_USER }} --env TV_PASS=${{ secrets.TV_PASS }} ${{ env.DOCKER_ORG }}/${{ env.DOCKER_REPO }}:${{ env.DOCKER_TAG }} 
 
       # push
       - name: Login to DockerHub
