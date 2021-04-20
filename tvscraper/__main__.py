@@ -56,7 +56,7 @@ def get_opts():
     p = argparse.ArgumentParser(
         description="Scrape TradingView Screener for a given chart")
     p.add_argument('-u', '--url', type=str, required=False,
-                   default="https://www.tradingview.com/chart/BCEOOLCE/")
+                   default="https://www.tradingview.com/chart/OkjDZr3W/")
     return vars(p.parse_args())
 
 

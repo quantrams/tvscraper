@@ -11,7 +11,7 @@ tests-docker: image
 	make -p ./downloads
 	docker run --rm -it -v ${PWD}/downloads:/tmp/chrome_downloads \
 		-v /dev/shm:/dev/shm --env-file .env $(DOCKER_IMAGE) \
-		--url "https://www.tradingview.com/chart/BCEOOLCE/"
+		--url "https://www.tradingview.com/chart/OkjDZr3W/"
 
 tests: tests-docker
 	tox --
