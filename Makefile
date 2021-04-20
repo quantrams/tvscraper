@@ -9,9 +9,8 @@ image: dist
 
 tests-docker: image 
 	make -p ./downloads
-	docker run --rm -it -v ${PWD}/downloads:/tmp/chrome_downloads \
-		-v /dev/shm:/dev/shm --env-file .env $(DOCKER_IMAGE) \
-		--url "https://www.tradingview.com/chart/OkjDZr3W/"
+	docker run --rm -it -v /dev/shm:/dev/shm --env-file .env $(DOCKER_IMAGE) \
+		--url "https://www.tradingview.com/chart/OkjDZr3W/" --cat-symbols
 
 tests: tests-docker
 	tox --
