@@ -1,5 +1,7 @@
 # TradingView Scraper
 
+[![Docker publish](https://github.com/quantrams/tvscraper/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/quantrams/tvscraper/actions/workflows/docker-publish.yml)
+
 Scrapes the Screener window for a given [TradingView](http://www.tradingview.com) chart layout.
 
 ## Features
